@@ -7,19 +7,19 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'workspaces'
+    redirectTo: 'login'
   },
   {
-    path: 'workspaces',
-    loadChildren: './workspaces/workspaces.module#WorkspacesModule'
+    path: 'login',
+    loadChildren: './login/login.module#LoginModule'
+  },
+  {
+    path: 'register',
+    loadChildren: './register/register.module#RegisterModule'
   },
   {
     path: '404',
     component: NotFoundComponent
-  },
-  {
-    path: ':wsID',
-    loadChildren: './workspace/workspace.module#WorkspaceModule'
   },
   {
     path: '**',
