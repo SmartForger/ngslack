@@ -14,6 +14,11 @@ const routes: Routes = [
   {
     path: 'register',
     loadChildren: './register/register.module#RegisterModule'
+  },
+  {
+    path: '**',
+    pathMatch: 'full',
+    redirectTo: 'login'
   }
 ];
 
