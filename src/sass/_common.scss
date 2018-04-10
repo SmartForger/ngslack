@@ -1,0 +1,22 @@
+.login-register-form {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 30px 30%;
+
+  > * {
+    width: 100%;
+  }
+
+  h1 {
+    margin-bottom: 1em;
+  }
+
+  button {
+    margin-top: 1em;
+  }
+}
