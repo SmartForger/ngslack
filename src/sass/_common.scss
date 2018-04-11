@@ -7,7 +7,7 @@
   margin: 0 auto;
   padding: 80px 30px 0;
 
-  > * {
+  form > * {
     width: 100%;
   }
 
@@ -17,5 +17,13 @@
 
   button {
     margin-top: 1em;
+  }
+
+  .additional {
+    text-align: center;
+  }
+
+  mat-form-field {
+    margin-top: 8px;
   }
 }
