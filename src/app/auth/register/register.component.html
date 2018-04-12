@@ -1,7 +1,7 @@
 <div class="login-register-form">
   <h1>Register</h1>
 
-  <form [formGroup]="registerForm">
+  <form [formGroup]="registerForm" (ngSubmit)="submit()">
     <mat-form-field>
       <input type="email" matInput placeholder="Email" formControlName="email">
       <mat-error *ngIf="registerForm.get('email').hasError('email') && !registerForm.get('email').hasError('required')">Please enter a valid email address</mat-error>
@@ -30,6 +30,4 @@
       Already register? Please <a routerLink="/login">login</a>
     </p>
   </form>
-
-
 </div>

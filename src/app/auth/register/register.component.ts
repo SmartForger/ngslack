@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { pick } from 'lodash';
+
 import { CustomValidators } from '../custom-validators';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-register',
@@ -10,7 +14,7 @@ export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private auth: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.registerForm = this.fb.group({
@@ -27,4 +31,11 @@ export class RegisterComponent implements OnInit {
     });
   }
 
+  submit() {
+    this.auth.register(
+      pick(this.registerForm.value, ['email', 'username', 'password'])
+    ).subscribe(success => {
+      this.router.navigate(['/home']);
+    });
+  }
 }
