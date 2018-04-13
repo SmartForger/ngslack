@@ -9,7 +9,7 @@ import { ApiService } from './api.service';
 export class UserService {
   user: BehaviorSubject<User> = new BehaviorSubject(new User());
 
-  constructor(api: ApiService, router: Router) {
+  constructor(private api: ApiService, private router: Router) {
     const token = localStorage.getItem('token');
     if (token) {
       const user = new User('', '', token);
@@ -24,8 +24,7 @@ export class UserService {
           },
           err => {
             console.log(err);
-            this.setUser('', '', '');
-            router.navigate(['/login']);
+            this.resetUser();
           }
         );
     }
@@ -35,6 +34,12 @@ export class UserService {
     localStorage.setItem('token', token);
     const newUser = new User(username, email, token);
     this.user.next(newUser);
+  }
+
+  resetUser() {
+    localStorage.removeItem('token');
+    this.user.next(new User());
+    this.router.navigate(['/login']);
   }
 
   isLoggedIn() {

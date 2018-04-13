@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material';
 
 import { AuthService } from '../auth.service';
+import { handleError } from '../../utils';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +14,12 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private auth: AuthService, private router: Router) { }
+  constructor(
+    private fb: FormBuilder,
+    private auth: AuthService,
+    private router: Router,
+    private snackBar: MatSnackBar
+  ) { }
 
   ngOnInit() {
     this.loginForm = this.fb.group({
@@ -27,8 +34,11 @@ export class LoginComponent implements OnInit {
 
   submit() {
     this.auth.login(this.loginForm.value)
-      .subscribe(success => {
-        this.router.navigate(['/home']);
-      });
+      .subscribe(
+        success => {
+          this.router.navigate(['/home']);
+        },
+        handleError(this.snackBar)
+      );
   }
 }
