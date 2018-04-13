@@ -24,12 +24,7 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 
 ## Screenshots
 
-### Login
-
 ![alt text](https://github.com/fullstackdevs14/ngslack/blob/master/screenshots/login.png)
-
-
-### Register
 
 ![alt text](https://github.com/fullstackdevs14/ngslack/blob/master/screenshots/register.png)
 
