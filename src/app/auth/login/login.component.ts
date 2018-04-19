@@ -13,6 +13,7 @@ import { handleError } from '../../utils';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
+  loading = false;
 
   constructor(
     private fb: FormBuilder,
@@ -33,12 +34,17 @@ export class LoginComponent implements OnInit {
   }
 
   submit() {
-    this.auth.login(this.loginForm.value)
-      .subscribe(
-        success => {
-          this.router.navigate(['/home']);
-        },
-        handleError(this.snackBar)
-      );
+    if (!this.loading) {
+      this.loading = true;
+
+      this.auth.login(this.loginForm.value)
+        .subscribe(
+          success => {
+            this.router.navigate(['/home']);
+          },
+          handleError(this.snackBar),
+          () => { this.loading = false; }
+        );
+    }
   }
 }

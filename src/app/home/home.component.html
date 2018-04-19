@@ -1,3 +1,12 @@
 <div class="home">
-  <button mat-raised-button color="primary" (click)="logout()">Logout</button>
+  <app-sidebar></app-sidebar>
+  <div class="chat-main">
+    <h1 className="chat-header">
+      #Channel
+    </h1>
+    <app-messages></app-messages>
+    <div className="chat-input">
+      <textarea autoresize></textarea>
+    </div>
+  </div>
 </div>
