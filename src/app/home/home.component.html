@@ -4,9 +4,12 @@
     <h1 class="chat-header">
       #Channel
     </h1>
-    <app-messages></app-messages>
+    <app-messages [messages]="messages"></app-messages>
     <div class="chat-input">
-      <textarea autosize></textarea>
+      <textarea
+        autosize
+        [(ngModel)]="msgToSend"
+        (keydown)="keydown($event)"></textarea>
     </div>
   </div>
 </div>

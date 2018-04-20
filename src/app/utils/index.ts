@@ -12,4 +12,4 @@ export const handleError = (snackBar) => err => {
   } else {
     snackBar.open('Unknown error', '', sbConfig);
   }
-}
+};

@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { UserService } from '../core/services/user.service';
 import { User } from '../core/models/user';
+import { ChatsService } from './chats.service';
+import { Message } from './models';
 
 @Component({
   selector: 'app-home',
@@ -12,10 +14,13 @@ export class HomeComponent implements OnInit, OnDestroy {
   user: User;
   user$: any;
   showWelcome = true;
+  msgToSend = '';
+  messages: Message[] = [];
 
   constructor(
     private userService: UserService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private chats: ChatsService
   ) { }
 
   ngOnInit() {
@@ -26,6 +31,13 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.showWelcomeMessage();
       }
     });
+
+    this.chats.getChats();
+    this.chats.initSocket();
+
+    this.chats.msgs.subscribe((value: Message[]) => {
+      this.messages = value;
+    });
   }
 
   ngOnDestroy() {
@@ -34,6 +46,14 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   logout() {
     this.userService.resetUser();
+  }
+
+  keydown(ev) {
+    if (ev.keyCode === 13 && !ev.ctrlKey && !ev.shiftKey) {
+      this.chats.sendMessage(this.msgToSend);
+      this.msgToSend = '';
+      ev.preventDefault();
+    }
   }
 
   private showWelcomeMessage() {
