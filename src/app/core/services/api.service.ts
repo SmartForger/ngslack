@@ -20,6 +20,10 @@ export class ApiService {
     return this.get('/auth/validate', token);
   }
 
+  getChats(token) {
+    return this.get('/chats', token);
+  }
+
   private get(url, token='') {
     if (token) {
       const httpOptions = {
