@@ -5,8 +5,9 @@ import { User } from '../core/models';
 import * as socketIo from 'socket.io-client';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Message } from './models';
+import { environment } from '../../environments/environment';
 
-const baseURL = 'http://localhost:8000';
+const baseURL = environment.baseURL;
 
 @Injectable()
 export class ChatsService {
