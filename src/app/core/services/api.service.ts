@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
-const baseURL = 'http://localhost:8000';
+const baseURL = environment.baseURL;
 
 @Injectable()
 export class ApiService {
@@ -24,7 +25,7 @@ export class ApiService {
     return this.get('/chats', token);
   }
 
-  private get(url, token='') {
+  private get(url, token = '') {
     if (token) {
       const httpOptions = {
         headers: new HttpHeaders({
@@ -39,7 +40,7 @@ export class ApiService {
     return this.httpClient.get(`${baseURL}${url}`);
   }
 
-  private post(url, data, token='') {
+  private post(url, data, token = '') {
     if (token) {
       const httpOptions = {
         headers: new HttpHeaders({
